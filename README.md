@@ -1,7 +1,7 @@
 ## Multiplicar Console App
 
 genera archivos de tablas de multiplicar.
-Son solo pruebas de programacion node, no os asusteis :)
+Son solo pruebas de programación node, no os asusteis :)
 
 usar desde consola: Node app  +
   -b  --base     Sería el numero de la tabla
