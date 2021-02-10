@@ -1,59 +1,36 @@
-//requires
-const { Console } = require('console');
 const fs = require('fs');
-const { resolve } = require('path');
 const colors = require('colors');
 
+const crearArchivo = async(base = 5, listar, hasta) => {
 
-let listarTabla = (base, limite = 10) => {
+    try {
 
-    return new Promise((resolve, reject) => {
+        let salida = '';
+        let consola = '';
 
-        console.log('==============================='.red)
-        console.log(`tabla de ${base}`.yellow)
-        console.log('==============================='.red)
-
-
-        for (let i = 1; i <= limite; i++) {
-            console.log(`${base} * ${i} = ${base * i}`.rainbow);
-
+        for (let i = 1; i <= hasta; i++) {
+            salida += `${base} X ${i} = ${base * i}\n`;
+            consola += `${base} ${'X'.cyan} ${i} ${'='.cyan} ${base * i}\n`;
         }
 
+        if (listar) {
+            console.log('=============================='.green);
+            console.log('       Tabla del : ', colors.blue(base));
+            console.log('=============================='.green);
+            console.log(consola);
+        }
 
+        fs.writeFileSync(`./tablas/tabla-${base}.txt`, salida);
 
-    });
+        return `tabla-${base}.txt`;
 
-
+    } catch (error) {
+        throw error;
+    }
 
 
 }
 
-let crearArchivo = (base, limite = 10) => {
-
-        return new Promise((resolve, reject) => {
-            let data = "";
-
-            if (!Number(base)) {
-                reject(`${base} no es un número`);
-                return;
-            }
-            for (let i = 1; i <= limite; i++) {
-                data += `${base} * ${i} = ${base * i}\n`;
-
-            }
-            fs.writeFile(`tablas/tabla-${base}`, data, (err) => {
-                if (err) reject(err);
-                else resolve(`tabla-${base}`);
-
-
-            });
-        });
-    }
-    //exportamos el archivo module.exports es un objeto
 module.exports = {
-
-    crearArchivo,
-    listarTabla
-
-
+    crearArchivo
 }
